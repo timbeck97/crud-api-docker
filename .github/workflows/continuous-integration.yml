@@ -40,7 +40,7 @@ jobs:
       
     - name: Push to Docker Hub Container Registry
       run: |
-        docker tag ${{ secrets.DOCKER_LOGIN }}/car-app:latest ${{ secrets.DOCKER_USERNAME }}/car-app:${{ github.run_id }}
+        docker tag ${{ secrets.DOCKER_LOGIN }}/car-app:latest ${{ secrets.DOCKER_LOGIN }}/car-app:${{ github.run_id }}
 
         docker push ${{ secrets.DOCKER_LOGIN }}/car-app:${{ github.run_id }}
         docker push ${{ secrets.DOCKER_LOGIN }}/car-app:latest
