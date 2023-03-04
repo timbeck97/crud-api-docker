@@ -14,8 +14,8 @@ services:
       - personal-project-network
     restart: unless-stopped
 
-  spring-boot-app:
-    image: timbeck1997/spring-boot-app
+  car-app:
+    image: timbeck1997/car-app
     build: .
     environment:
       spring.datasource.url: jdbc:postgresql://db:5432/cars
@@ -24,7 +24,8 @@ services:
     ports:
       - 8080:8080
     command:
-      - mvn spring-boot:run
+      - mvn clean package
+
     depends_on:
       - db
     networks:
