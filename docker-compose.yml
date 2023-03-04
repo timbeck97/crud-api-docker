@@ -1,0 +1,35 @@
+services:
+  db:
+    container_name: db
+    image: postgres
+    environment:
+      POSTGRES_USER: timbeck
+      POSTGRES_DB: cars
+      POSTGRES_PASSWORD: password
+      PGDATA: /data/postgres
+
+    ports:
+      - "5432:5432"
+    networks:
+      - personal-project-network
+    restart: unless-stopped
+
+  spring-boot-app:
+    image: timbeck1997/spring-boot-app
+    build: .
+    environment:
+      spring.datasource.url: jdbc:postgresql://db:5432/cars
+      spring.datasource.username: timbeck
+      spring.datasource.password: password
+    ports:
+      - 8080:8080
+    command:
+      - mvn spring-boot:run
+    depends_on:
+      - db
+    networks:
+      - personal-project-network
+
+networks:
+  personal-project-network:
+    driver: bridge
