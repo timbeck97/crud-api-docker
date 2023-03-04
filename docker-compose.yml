@@ -24,8 +24,7 @@ services:
     ports:
       - 8080:8080
     command:
-      - mvn clean package
-
+      - mvn spring-boot:run
     depends_on:
       - db
     networks:
